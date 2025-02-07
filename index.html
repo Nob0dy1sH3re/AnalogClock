@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NO SIGNAL</title>
+    <style>
+        body {
+            background: linear-gradient(
+                to right,
+                #ffffff 12.5%,
+                #ffff00 12.5% 25%,
+                #00ffff 25% 37.5%,
+                #00ff00 37.5% 50%,
+                #ff00ff 50% 62.5%,
+                #ff0000 62.5% 75%,
+                #0000ff 75% 87.5%,
+                #000000 87.5% 100%
+            );
+            background-size: 100% 100%;
+            animation: screen-shake 0.1s infinite;
+            overflow: hidden;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            font-family: 'Courier New', Courier, monospace;
+            color: white;
+            position: relative;
+        }
+
+        @keyframes screen-shake {
+            0%, 100% {
+                transform: translate(0, 0);
+            }
+            10%, 90% {
+                transform: translate(-1px, 1px);
+            }
+            20%, 80% {
+                transform: translate(1px, -1px);
+            }
+            30%, 50%, 70% {
+                transform: translate(-1px, -1px);
+            }
+            40%, 60% {
+                transform: translate(1px, 1px);
+            }
+        }
+
+        .noise {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://media.giphy.com/media/oEI9uBYSzLpBK/giphy.gif');
+            opacity: 0.3;
+            pointer-events: none;
+            animation: noise 0.2s infinite;
+        }
+
+        @keyframes noise {
+            0%, 100% {
+                opacity: 0.3;
+            }
+            50% {
+                opacity: 0.4;
+            }
+        }
+
+        .black-bar {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            background: black;
+            padding: 0.5rem 2rem;
+            text-align: center;
+            text-transform: uppercase;
+            font-weight: bold;
+            font-size: 2rem;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .top-bar {
+            top: 10%;
+        }
+
+        .middle-bar {
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        @keyframes flash {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        .top-bar span {
+            animation: flash 1s infinite;
+        }
+
+        .middle-bar span {
+            animation: glitch 0.1s infinite;
+        }
+
+        @keyframes glitch {
+            0%, 100% {
+                transform: translate(0, 0);
+            }
+            20% {
+                transform: translate(-2px, 2px);
+            }
+            40% {
+                transform: translate(2px, -2px);
+            }
+            60% {
+                transform: translate(-2px, -2px);
+            }
+            80% {
+                transform: translate(2px, 2px);
+            }
+        }
+
+        .warning {
+            position: absolute;
+            bottom: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.5rem;
+            color: red;
+            animation: warning-flash 5s infinite;
+        }
+
+        @keyframes warning-flash {
+            0%, 100% {
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+
+        .shadow {
+            position: absolute;
+            top: 50%;
+            left: 10%;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+            opacity: 0.1;
+            animation: shadow-move 3s infinite;
+        }
+
+        @keyframes shadow-move {
+            0%, 100% {
+                transform: translate(0, 0);
+            }
+            50% {
+                transform: translate(5px, 5px);
+            }
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            pointer-events: none;
+        }
+
+        .face {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 200px;
+            height: 200px;
+            background: url('https://th.bing.com/th/id/OIP.FJ577WtxcgtL9cjtGU06mwHaLi?w=115&h=180&c=7&r=0&o=5&dpr=2&pid=1.7') no-repeat center center;
+            background-size: cover;
+            opacity: 0;
+            transform: translate(-50%, -50%);
+            animation: face-glitch 10s infinite;
+        }
+
+        @keyframes face-glitch {
+            0%, 100% {
+                opacity: 0;
+            }
+            5%, 95% {
+                opacity: 0.1;
+            }
+            50% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(1.2);
+            }
+        }
+
+        @keyframes time-flicker {
+            0%, 100% {
+                color: white;
+            }
+            50% {
+                color: red;
+            }
+        }
+
+        @keyframes text-glitch {
+            0%, 100% {
+                color: white;
+                content: "NO SIGNAL";
+            }
+            50% {
+                color: red;
+                content: "NO ESCAPE";
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="noise"></div>
+    <div class="black-bar top-bar"><span id="signal-text">NO SIGNAL</span></div>
+    <div class="black-bar middle-bar"><span id="time">TIME: 00:00:00</span></div>
+    <div class="warning">A Site By Nob0dy</div>
+    <div class="shadow"></div>
+    <div class="overlay"></div>
+    <div class="face"></div>
+
+
+    <script>
+        function updateTime() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            document.getElementById('time').textContent = `TIME: ${hours}:${minutes}:${seconds}`;
+        }
+
+        setInterval(updateTime, 1000);
+
+        function randomFlicker() {
+            const timeElement = document.getElementById('time');
+            timeElement.style.animation = 'none';
+            if (Math.random() > 0.7) {
+                timeElement.style.animation = 'time-flicker 0.5s infinite';
+            }
+        }
+
+        setInterval(randomFlicker, 2000);
+
+        function textGlitch() {
+            const signalText = document.getElementById('signal-text');
+            if (Math.random() > 0.8) {
+                signalText.style.animation = 'text-glitch 0.5s steps(2, end)';
+                setTimeout(() => {
+                    signalText.style.animation = '';
+                }, 500);
+            }
+        }
+
+        setInterval(textGlitch, 3000);
+
+        document.body.addEventListener('click', () => {
+            const bars = document.querySelectorAll('.black-bar span');
+            bars.forEach(bar => {
+                bar.style.animation = 'none';
+                setTimeout(() => {
+                    bar.style.animation = '';
+                }, 10);
+            });
+
+            const audio = document.getElementById('static-audio');
+            audio.play().catch(err => console.log("Audio autoplay prevented:", err));
+        });
+    </script>
+</body>
+</html>
